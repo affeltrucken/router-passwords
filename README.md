@@ -23,6 +23,6 @@ Would be:    Tele2_{XXXXXX}
 | TP-Link | TP-Link_{XXXX} | ?d?d?d?d?d?d?d?d | 8 | Cracked in less than a minute | 10 000 000 |
 | Tre | 3Bredband-{XXXX} | ?a?a?a?a?a?a?a?a?a?a | 10 | Don't even bother | 839 299 365 868 340 224 |
 | Com Hem | COMHEM_{XXXXXX} | ?l?l?l?l?l?l?l?l | 8 | ~6 days to crack @ 380 000 | 208 827 064 576 |
-| Telia | Telia-{XXXXXX} | ?du?du?du?du?du?du?du?du?du?du | 10 | ~1 month | 1 015 599 608 640 |
+| Telia | Telia-{XXXXXX} | ?du?du?du?du?du?du?du?du?du?du | 10 | ~110 days | 3 656 158 440 062 976 |
 |  |  |  |  |  |  |
 |  |  |  |  |  |  |
