@@ -25,4 +25,4 @@ Would be:    Tele2_{XXXXXX}
 | Com Hem | COMHEM_{XXXXXX} | ?l?l?l?l?l?l?l?l | 8 | ~6 days to crack @ 380 000 | 208 827 064 576 |
 | Telia | Telia-{XXXXXX} | ?du?du?du?du?du?du?du?du?du?du | 10 | ~110 days | 3 656 158 440 062 976 |
 | Bredband 2 | Bredband2-{XXXX} | ?du?du?du?du?du?du?du?du?du?du?du?du?du?du | 14 | 85,700 years | 1 028 071 702 528 482 304 |
-| Telia | TeliaGateway{XX-XX-XX-XX-XX-XX} | ?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d | 10 | 33.5 days | 1 099 511 627 776 |
+| Telia | TeliaGateway{XX-XX-XX-XX-XX-XX} | ?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d | 10 | Each char is uppercase A-F, or a digit, 33.5 days to crack | 1 099 511 627 776 |
