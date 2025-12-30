@@ -1,29 +1,41 @@
-Guide for reading passwords patterns:
-- ?l - Lowercase letter (a-z)
-- ?u - Uppercase letter (A-Z)
-- ?d - Digit (0-9)
-- ?s - Special character (e.g., !, @, #, etc.)
-- ?a - Any alphanumeric character (lowercase, uppercase, digit, special)
+# Swedish ISP Router Wordlist Masks & Target Profiles
 
-These can be combined, for example:
+A collection of default WPA2/WPA3 password patterns for common routers and ISPs in Sweden. This data is intended for security research, penetration testing, and password recovery.
 
-```?ld?ld?ld?ld?ld?ld?ld?ld```
+## Disclaimer
+This repository is for **educational and authorized security testing purposes only**. Unauthorized access to networks you do not own or have explicit permission to test is illegal.
 
-for lowercase or digit for each character.
+## Hashcat Mask Legend
+The patterns below use standard Hashcat mask syntax.
 
-All characters in curly brackets in ROUTER-NAME column
-indicate where the unique string for each router is.
+* **`?l`** = Lowercase letter (a-z)
+* **`?u`** = Uppercase letter (A-Z)
+* **`?d`** = Digit (0-9)
+* **`?s`** = Special character
+* **`?a`** = Alphanumeric (a-z, A-Z, 0-9, special)
+* **`-1`** = Custom Charset (Defined in the command)
 
-For example: ```Tele2_F4812B```
-would be:    ```Tele2_{XXXXXX}```
+## Target Profiles
 
-| BRAND | WLAN-ROUTER-NAME | WLAN-PASSWORD-PATTERN | LENGTH | COMMENT | # OF HASHES |
-|---|---|---|---|---|---|
-| Tele2 | Tele2_{XXXXXX} | ?ld?ld?ld?ld?ld?ld?ld?ld | 8 | ~1 month to crack @ 380 000 HPS (RTX 2060)  | 1 015 599 608 640 |
-| TP-Link | TP-Link_{XXXX} | ?d?d?d?d?d?d?d?d | 8 | Cracked in less than 5 minutes | 100 000 000 |
-| Tre | 3Bredband-{XXXX} | ?a?a?a?a?a?a?a?a?a?a | 10 | 69,972 years | 839 299 365 868 340 224 |
-| Com Hem | COMHEM_{XXXXXX} | ?l?l?l?l?l?l?l?l | 8 | ~6 days to crack @ 380 000 | 208 827 064 576 |
-| Telia | Telia-{XXXXXX} | ?du?du?du?du?du?du?du?du?du?du | 10 | ~110 days | 3 656 158 440 062 976 |
-| Bredband 2 | Bredband2-{XXXX} | ?du?du?du?du?du?du?du?du?du?du?du?du?du?du | 14 | 85,700 years | 1 028 071 702 528 482 304 |
-| Telia | TeliaGateway{XX-XX-XX-XX-XX-XX} | ?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d?(A-F)d | 10 | Each char is uppercase A-F, or a digit, 33.5 days to crack | 1 099 511 627 776 |
-| Zyxel | Zyxel_XXXX | ?lud?lud?lud?lud?lud?lud?lud?lud?lud?lud?lud?lud?lud | 13 | 16,691,745,624 years | 200 028 540 000 000 000 000 000 |
+All characters in **`{curly brackets}`** in the **Router Name** column indicate where the unique string for each router is located.
+
+| ISP / Brand | SSID Pattern | Password Logic (Human Readable) | Length | Hashcat Mask (Syntax) | Est. Difficulty |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **TP-Link** | `TP-Link_{XXXX}` | 8 Digits | 8 | `?d?d?d?d?d?d?d?d` | **Instant** (<5m) |
+| **Tele2** | `Tele2_{XXXXXX}` | Lowercase + Digits (Base36) | 8 | `-1 ?l?d ?1?1?1?1?1?1?1?1` | **High** (Weeks) |
+| **Tele2 / ComHem** | `COMHEM_{XXXXXX}` | Lowercase + Digits (Hex)* | 8 | `-1 ?dabcdef ?1?1?1?1?1?1?1?1` | **Medium** (Hours) |
+| **Telia** | `Telia-{XXXXXX}` | Uppercase + Digits (Hex) | 10 | `-1 ?u?d ?1?1?1?1?1?1?1?1?1?1` | **Hard** (Days) |
+| **Tre (3)** | `3Bredband-{XXXX}` | Alphanumeric (Mixed Case) | 10 | `-1 ?l?u?d ?1?1?1?1?1?1?1?1?1?1` | **Extreme** (Years) |
+| **Bredband2** | `Bredband2-{XXXX}` | Uppercase + Digits | 14 | `-1 ?u?d ?1?1?1?1...` (x14) | **Impossible** |
+| **Zyxel** | `Zyxel_XXXX` | Lower + Upper + Digit | 13 | `?a?a?a...` (x13) | **Impossible** |
+
+*> **Note on Tele2/ComHem:** Many Sagemcom routers use Hexadecimal (0-9, a-f) rather than full alphanumeric. If no letters past 'f' are observed, use the Hex mask for significantly faster cracking.*
+
+## Usage Example
+
+To run a specific attack pattern using Hashcat (e.g., for Tele2 Hex):
+
+```bash
+# Define custom charset 1 as digits + a,b,c,d,e,f
+hashcat -m 22000 capture.hc22000 -a 3 -1 ?dabcdef ?1?1?1?1?1?1?1?1
+```
